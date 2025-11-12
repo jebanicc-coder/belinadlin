@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Belin ❤️ Adlin - Wedding Wishes</title>
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      margin: 0;
+      background: linear-gradient(180deg, #fff5f7, #ffe3e8);
+      color: #333;
+      text-align: center;
+    }
+
+    header {
+      padding: 40px 20px 20px;
+    }
+
+    h1 {
+      font-size: 28px;
+      color: #d6336c;
+      margin-bottom: 10px;
+    }
+
+    p.subtitle {
+      font-size: 16px;
+      color: #555;
+    }
+
+    img.couple {
+      width: 260px;
+      border-radius: 16px;
+      margin: 20px auto;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    form {
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      max-width: 360px;
+      margin: 0 auto 40px;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-family: inherit;
+    }
+
+    button {
+      margin-top: 15px;
+      background: #d6336c;
+      color: #fff;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background: #c2185b;
+    }
+
+    #thankyou {
+      display: none;
+      padding: 40px;
+    }
+
+    .share-btn {
+      background: #28a745;
+      margin-top: 10px;
+    }
+
+    /* Hidden YouTube video */
+    #video-container {
+      display: none;
+      margin-top: 30px;
+    }
+
+    iframe {
+      width: 90%;
+      max-width: 560px;
+      height: 315px;
+      border: none;
+      border-radius: 12px;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>💖 Belin & Adlin 💖</h1>
+    <p class="subtitle">An Endless Journey Begins Today — 12 November 2025</p>
+    <img src="https://i.pinimg.com/736x/d4/26/2b/d4262b84fdf8b83bfa68ed770bbffffa.jpg" class="couple"
+      alt="Belin and Adlin">
+  </header>
+
+  <section id="form-section">
+    <form id="wishForm">
+      <h3>Wish Us 💌</h3>
+      <input type="text" id="name" placeholder="Your Name *" required>
+      <textarea id="message" placeholder="Your Message *" rows="4" required></textarea>
+      <!-- <input type="file" id="photo" accept="image/*"> -->
+      <button type="submit">Send Wish</button>
+    </form>
+  </section>
+
+  <div id="thankyou">
+    <h2>🎉 Thank You for Your Wishes! 🎉</h2>
+    <p>Belin & Adlin will cherish your message forever ❤️</p>
+    <button class="share-btn" onclick="sharePage()">Share this page in your Status</button>
+  </div>
+
+  <!-- Hidden YouTube video -->
+  <div id="video-container">
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/Si7DovGBDuQ?si=qIgv_jmShsZrAkf5"
+      title="YouTube video player" frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  </div>
+
+  <script>
+    const form = document.getElementById('wishForm');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      const message = document.getElementById('message').value;
+      // const file = document.getElementById('photo').files[0];
+
+      // let photoUrl = "";
+      // if (file) {
+      //   const fd = new FormData();
+      //   fd.append('file', file);
+      //   fd.append('upload_preset', 'ml_default');
+      //   const res = await fetch('https://api.cloudinary.com/v1_1/demo/image/upload', { method: 'POST', body: fd });
+      //   const data = await res.json();
+      //   photoUrl = data.secure_url;
+      // }
+
+      await fetch("https://script.google.com/macros/s/AKfycbz5sMzcg6zFGRr6mhUJGCk4xjw8iJ9VQJPMuYQWUoD2Y7gJ7hQkc-eSdmhx7fIvvpSMdA/exec", {
+        method: "POST",
+        body: JSON.stringify({ name, message})
+      });
+
+      document.getElementById('form-section').style.display = 'none';
+      document.getElementById('thankyou').style.display = 'block';
+
+      // Show and play the hidden video
+      document.getElementById('video-container').style.display = 'block';
+
+      confetti();
+    });
+
+    function sharePage() {
+      if (navigator.share) {
+        navigator.share({
+          title: 'Wish Belin & Adlin ❤️',
+          text: 'Join and wish the lovely couple!',
+          url: window.location.href
+        });
+      } else {
+        alert("Copy this link to share:\\n" + window.location.href);
+      }
+    }
+
+
+function confetti() {
+  const colors = ['#ff0a54', '#ff477e', '#ff85a1', '#fbb1b1', '#f7cad0', '#c9184a', '#9d0208'];
+  const shapes = ['🎈', '🎉', '💖', '✨', '🎀']; // balloons, ribbons, sparkles
+  const total = 100; // total confetti count
+
+  for (let i = 0; i < total; i++) {
+    const conf = document.createElement('div');
+    conf.textContent = shapes[Math.floor(Math.random() * shapes.length)];
+    conf.style.position = 'fixed';
+    conf.style.bottom = '-5vh'; // start below the viewport
+    conf.style.left = Math.random() * 100 + 'vw';
+    conf.style.fontSize = (Math.random() * 20 + 20) + 'px';
+    conf.style.color = colors[Math.floor(Math.random() * colors.length)];
+    conf.style.opacity = Math.random() * 0.8 + 0.2;
+    conf.style.transform = `rotate(${Math.random() * 360}deg)`;
+    conf.style.transition = `bottom 3s ease-out, transform 3s ease-in-out, left 3s ease-in-out`;
+    conf.style.zIndex = 9999;
+    document.body.appendChild(conf);
+
+    // Animate popping upward
+    setTimeout(() => {
+      conf.style.bottom = '100vh';
+      conf.style.left = (Math.random() * 100) + 'vw';
+      conf.style.transform = `rotate(${Math.random() * 720}deg)`;
+    }, Math.random() * 500); // staggered start for realism
+
+    // Remove after animation
+    setTimeout(() => conf.remove(), 3500 + Math.random() * 500);
+  }
+}
+</script>
+</body>
+
+</html>
